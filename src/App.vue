@@ -1,30 +1,43 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <app-header />
+    <router-view v-slot="{ Component }">
+      <transition name="slide-fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
-  <router-view/>
 </template>
 
+<script>
+import AppHeader from './components/AppHeader.vue'
+export default {
+  name: 'LeBonCoinCoin',
+  mounted () {
+    this.$store.dispatch('loadNfts')
+  },
+  components: {
+    AppHeader
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  background: rgb(245, 245, 245);
 }
 
-#nav {
-  padding: 30px;
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>
