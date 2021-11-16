@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-light-gray sticky z-20 top-0">
     <div class="max-w-screen-lg mx-auto p-3 flex items-center justify-between">
       <div class="flex-auto">
         <router-link :to="{ name: 'home' }">
-          <img src="../assets/logo.png" alt="Leboncoincoin logo" class="inline-block mx-2 h-16" />
+          <img src="../assets/logo.svg" alt="Leboncoincoin logo" class="inline-block mx-2 h-12" />
         </router-link>
         <router-link
           :to="{ name: 'create:nft' }"

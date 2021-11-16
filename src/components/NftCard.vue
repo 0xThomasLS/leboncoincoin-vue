@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-md m-2 flex flex-col overflow-hidden">
+  <div class="bg-gray rounded-md m-2 flex flex-col overflow-hidden cursor-pointer" @click="openDetail">
     <!-- Thumbnail -->
     <div class="flex-none rounded-t-md bg-gray h-48">
       <img
@@ -30,7 +30,7 @@
         class="flex-grow"
         type="button"
         color="primary"
-        @click.prevent="$emit('buy')"
+        @click.stop="$emit('buy')"
       >
         Acheter
       </app-button>
@@ -48,6 +48,10 @@ export default {
       type: String,
       require: true
     },
+    id: {
+      type: [ Number, String ],
+      require: true
+    },
     desc: {
       type: String
     },
@@ -57,6 +61,16 @@ export default {
     price: {
       type: [ Number, String ],
       require: true
+    }
+  },
+  methods: {
+    openDetail () {
+      this.$router.push({
+        name: 'show:nft',
+        params: {
+          id: this.id
+        }
+      })
     }
   },
   components: {

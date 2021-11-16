@@ -10,6 +10,11 @@ const routes = [
     path: '/nft/create',
     name: 'create:nft',
     component: () => import('../views/CreateNft.vue')
+  },
+  {
+    path: '/nft/:id',
+    name: 'show:nft',
+    component: () => import('../views/ShowNft.vue')
   }
 ]
 

@@ -1,8 +1,8 @@
 <template>
   <transition name="fade">
-    <div v-if="show" class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+    <div v-if="show" class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center">
       <div class="bg-black opacity-30 h-full w-full absolute" style="z-index: -1" @click="$emit('close')"></div>
-      <div class="bg-white w-full max-w-lg rounded-md m-2">
+      <div class="bg-gray w-full max-w-lg rounded-md m-2">
         <div class="shadow-sm p-2">
           <h1 class="text-xl text-center">
             {{ title }}

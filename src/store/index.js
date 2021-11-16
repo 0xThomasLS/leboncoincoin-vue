@@ -7,6 +7,11 @@ export default createStore({
   state: {
     nfts: []
   },
+  getters: {
+    getNftById: (state) => (id) => {
+      return state.nfts.find(nft => nft.id == id)
+    }
+  },
   mutations: {
     loadNfts (state, payload) {
       if (payload && payload.length > 0) {
@@ -33,14 +38,12 @@ export default createStore({
             image: meta.image,
             name: meta.name,
             description: meta.description,
-            itemId: index
+            id: index
           }
         })
       )
 
       commit('loadNfts', items)
     }
-  },
-  modules: {
   }
 })

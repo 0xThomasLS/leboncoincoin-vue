@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 body {
-  background: rgb(245, 245, 245);
+  background: rgb(250, 250, 250);
 }
 
 .slide-fade-enter-active {
