@@ -11,21 +11,24 @@
     </div>
 
     <!-- Meta -->
-    <div class="flex-none flex justify-between items-start p-2">
+    <div class="flex-none flex justify-between items-center p-2">
       <div class="font-bold text-lg">
         {{ title }}
       </div>
-      <div class="flex items-center bg-blue">
+      <div class="flex items-center bg-blue text-xs">
         <span>{{ price }}</span>
-        <img src="../assets/logo.png" alt="Valou logo" class="mx-2 h-6" />
+        <img src="@/assets/valou.png" alt="Valou logo" class="mx-2 h-4 w-4" />
       </div>
     </div>
-    <div class="flex-auto px-2 text-xs">
+    <div :class="[ 'flex-auto', 'px-2', 'text-xs', { 'rounded-b-md pb-2': !user } ]">
       {{ desc }}
     </div>
 
     <!-- Manage -->
-    <div class="flex-none mt-2 flex rounded-b-md shadow-sm shadow-inner">
+    <div
+      v-if="user"
+      class="flex-none mt-2 flex rounded-b-md shadow-sm shadow-inner"
+    >
       <app-button
         class="flex-grow"
         type="button"
@@ -61,6 +64,11 @@ export default {
     price: {
       type: [ Number, String ],
       require: true
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {

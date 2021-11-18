@@ -1,46 +1,115 @@
 <template>
+  <app-popin
+    :show="connexion"
+    title="Sélectionne ton wallet"
+    @close="connexion = false"
+  >
+    <div class="p-8">
+      <ul>
+        <li class="flex flex-col items-center cursor-pointer" @click.prevent="connect('metamask')">
+          <img class="h-16 w-16" src="@/assets/metamask.png" alt="Metamask icon" />
+          <div>Metamask</div>
+        </li>
+      </ul>
+    </div>
+  </app-popin>
   <div class="bg-light-gray sticky z-20 top-0">
     <div class="max-w-screen-lg mx-auto p-3 flex items-center justify-between">
       <div class="flex-auto">
         <router-link :to="{ name: 'home' }">
-          <img src="../assets/logo.svg" alt="Leboncoincoin logo" class="inline-block mx-2 h-12" />
+          <img src="@/assets/logo.svg" alt="Leboncoincoin logo" class="inline-block mx-2 h-12" />
         </router-link>
         <router-link
+          v-if="user"
           :to="{ name: 'create:nft' }"
           v-slot="{ navigate }"
           custom
         >
-          <app-button type="button" @click="navigate">
+          <app-button
+            type="button"
+            @click="navigate"
+          >
             Créer un NFT
           </app-button>
         </router-link>
       </div>
       <div>
-        <app-button type="button" color="primary">
-          Connexion
-        </app-button>
+        <ul class="flex gap-4 menu">
+          <li
+            v-if="!user"
+            class="cursor-pointer flex flex-col items-center text-dark-gray"
+            @click.prevent="connexion = true"
+          >
+            <UserCircleIcon class="h-8 w-8" />
+            <span>Connexion</span>
+          </li>
+          <template v-else>
+            <li
+              class="cursor-pointer flex flex-col items-center text-dark-gray"
+            >
+              <PhotographIcon class="h-8 w-8" />
+              <span>My world</span>
+            </li>
+            <li
+              class="cursor-pointer flex flex-col items-center text-dark-gray"
+              @click.prevent="$store.dispatch('disconnect')"
+            >
+              <UserCircleIcon class="h-8 w-8" />
+              <span>Déconnexion</span>
+            </li>
+          </template>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AppPopin from '../components/AppPopin.vue'
 import AppButton from './AppButton.vue'
+import { UserCircleIcon, PhotographIcon } from '@heroicons/vue/outline'
 
 export default {
   name: 'AppHeader',
   data () {
     return {
-      query: undefined
+      query: undefined,
+      connexion: false
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {
-    search () {
-      // TODO
+    async connect (providerName) {
+      try {
+        if (await this.$store.dispatch('connexion', providerName)) {
+          this.connexion = false
+        }
+      } catch (e) {
+        console.log('Error:', e)
+      }
     }
   },
   components: {
-    AppButton
+    AppPopin,
+    AppButton,
+    UserCircleIcon,
+    PhotographIcon
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.menu {
+  & > li {
+    transition: 0.2s ease-out color;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+</style>

@@ -1,9 +1,15 @@
 <template>
   <transition name="fade">
     <div v-if="show" class="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center">
-      <div class="bg-black opacity-30 h-full w-full absolute" style="z-index: -1" @click="$emit('close')"></div>
+      <div class="bg-black opacity-30 h-full w-full absolute" style="z-index: -1" @click="close"></div>
       <div class="bg-gray w-full max-w-lg rounded-md m-2">
-        <div class="shadow-sm p-2">
+        <div class="shadow-sm p-2 text-dark-gray">
+          <div class="float-right">
+            <XIcon
+              class="cursor-pointer h-8 w-8"
+              @click.prevent="close"
+            />
+          </div>
           <h1 class="text-xl text-center">
             {{ title }}
           </h1>
@@ -15,6 +21,8 @@
 </template>
 
 <script>
+import { XIcon } from '@heroicons/vue/outline'
+
 export default {
   name: 'AppPopin',
   props: {
@@ -26,6 +34,14 @@ export default {
       type: String,
       require: true
     }
+  },
+  methods: {
+    close () {
+      this.$emit('close')
+    }
+  },
+  components: {
+    XIcon
   }
 }
 </script>

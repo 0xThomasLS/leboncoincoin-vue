@@ -9,12 +9,12 @@
   >
     <div class="flex-auto flex h-full overflow-auto items-center">
       <img
-        class="h-auto mx-auto"
+        class="max-w-full max-h-full mx-auto"
         alt="NFT thumbnail"
         :src="nft.image"
       />
     </div>
-    <div class="flex-none flex flex-col bg-gray w-full xl:max-w-lg p-8 overflow-auto">
+    <div class="flex-none flex flex-col bg-gray w-full xl:max-w-lg p-8 overflow-auto break-words">
       <div class="flex-auto">
         <h1 class="text-4xl font-semibold">{{ nft.name }}</h1>
         <div class="text-dark-gray font-semibold">

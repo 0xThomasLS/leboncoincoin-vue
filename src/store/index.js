@@ -5,7 +5,8 @@ import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 
 export default createStore({
   state: {
-    nfts: []
+    nfts: [],
+    user: undefined
   },
   getters: {
     getNftById: (state) => (id) => {
@@ -17,6 +18,9 @@ export default createStore({
       if (payload && payload.length > 0) {
         state.nfts = payload
       }
+    },
+    connectUser (state, user) {
+      state.user = user
     }
   },
   actions: {
@@ -44,6 +48,21 @@ export default createStore({
       )
 
       commit('loadNfts', items)
+    },
+    async connexion ({ commit }, providerName) {
+      if ('metamask' === providerName) {
+        const user = await window.ethereum.request({ method: 'eth_requestAccounts' })
+
+        if (user && user.length > 0) {
+          commit('connectUser', user[0])
+          return true
+        } else {
+          throw 'User not found'
+        }
+      }
+    },
+    disconnect ({ state }) {
+      state.user = undefined
     }
   }
 })
