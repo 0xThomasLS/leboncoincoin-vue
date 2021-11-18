@@ -1,10 +1,10 @@
 <template>
   <div class="bg-gray rounded-md m-2 flex flex-col overflow-hidden cursor-pointer" @click="openDetail">
     <!-- Thumbnail -->
-    <div class="flex-none rounded-t-md bg-gray h-48">
+    <div class="flex-none flex rounded-t-md bg-gray h-48">
       <img
         v-if="thumbnail"
-        class="h-full mx-auto"
+        class="max-w-full max-h-full mx-auto"
         alt="NFT thumbnail"
         :src="thumbnail"
       />

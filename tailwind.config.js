@@ -17,6 +17,7 @@ module.exports = {
         darker: 'rgb(20, 20, 20)',
         plum: 'rgb(121, 38, 79)',
         pink: 'rgb(252, 41, 122)',
+        red: 'rgb(255, 0, 0)',
       }
     }
   },

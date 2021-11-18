@@ -6,7 +6,7 @@
       <nft-card
         v-for="item in items"
         :key="JSON.stringify(item)"
-        :id="item.id"
+        :id="item.tokenId"
         :title="item.name"
         :desc="item.description"
         :thumbnail="item.image"

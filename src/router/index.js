@@ -7,14 +7,25 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/nft/create',
-    name: 'create:nft',
-    component: () => import('../views/CreateNft.vue')
-  },
-  {
     path: '/nft/:id',
     name: 'show:nft',
     component: () => import('../views/ShowNft.vue')
+  },
+  {
+    path: '/nft/create',
+    name: 'create:nft',
+    component: () => import('../views/CreateNft.vue'),
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/collection',
+    name: 'show:user-collection',
+    component: () => import('../views/UserCollection.vue'),
+    meta: {
+      requireAuth: true
+    }
   }
 ]
 
