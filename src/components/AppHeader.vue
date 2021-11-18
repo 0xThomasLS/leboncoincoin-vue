@@ -9,7 +9,8 @@
         <span class="font-bold">Erreur</span>
         {{ error }}
       </div>
-      <ul>
+      <Loader v-else-if="loading" class="mx-auto" />
+      <ul v-else>
         <li class="flex flex-col items-center cursor-pointer" @click.prevent="connect('metamask')">
           <img class="h-16 w-16" src="@/assets/metamask.png" alt="Metamask icon" />
           <div>Metamask</div>
@@ -75,7 +76,8 @@
 </template>
 
 <script>
-import AppPopin from '../components/AppPopin.vue'
+import AppPopin from './AppPopin.vue'
+import Loader from './Loader.vue'
 import { PlusCircleIcon, UserCircleIcon, PhotographIcon } from '@heroicons/vue/outline'
 
 export default {
@@ -84,7 +86,8 @@ export default {
     return {
       query: undefined,
       connexion: false,
-      error: undefined
+      error: undefined,
+      loading: false
     }
   },
   computed: {
@@ -103,12 +106,16 @@ export default {
     async connect (providerName) {
       try {
         this.error = undefined
+        this.loading = true
 
         if (await this.$store.dispatch('connexion', providerName)) {
           this.connexion = false
+          this.loading = false
         }
       } catch (e) {
         console.log('Error:', e)
+        this.loading = false
+
         switch (e) {
           case 'WORST_CHAIN':
             this.error = 'La blockchain sélectionnée doit être Polygon'
@@ -119,6 +126,7 @@ export default {
   },
   components: {
     AppPopin,
+    Loader,
     PlusCircleIcon,
     UserCircleIcon,
     PhotographIcon

@@ -20,4 +20,7 @@ import './index.css'
 })
 
 // Create app and bind it
-createApp(App).use(store).use(router).mount('#app')
+createApp(App)
+  .use(store)
+  .use(router)
+  .mount('#app')

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import AppButton from '../components/AppButton.vue'
+import AppButton from '@/components/AppButton.vue'
 
 export default {
   name: 'CreateNft',

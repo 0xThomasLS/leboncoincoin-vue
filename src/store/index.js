@@ -26,16 +26,16 @@ async function formatNfts (provider, data) {
 
 export default createStore({
   state: {
-    nfts: [],
+    nfts: undefined,
     user: undefined,
-    collection: {
-      created: [],
-      items: []
-    }
+    collection: undefined
   },
   getters: {
     getNftById: (state) => (id) => {
-      return state.nfts.find(nft => nft.tokenId == id)
+      if (state.nfts) {
+        return state.nfts.find(nft => nft.tokenId == id)
+      }
+      return undefined
     }
   },
   mutations: {
@@ -49,13 +49,14 @@ export default createStore({
     },
     setMyCollection (state, payload) {
       if (payload) {
+        state.collection = {}
+
         if (payload.created) {
           state.collection.created = payload.created
         }
         if (payload.items) {
           state.collection.items = payload.items
         }
-        console.log('State:', state.collection)
       }
     }
   },

@@ -4,7 +4,8 @@
     <h1 v-else class="text-4xl font-bold py-2">Collections de {{ $route.params.addr }}</h1>
   </div>
   <div class="w-full mt-8 p-4">
-    <div class="lg:flex">
+    <Loader v-if="!collection" class="my-16 mx-auto" />
+    <div v-else class="lg:flex">
       <div class="lg:w-1/2">
         <h2 class="text-2xl font-bold py-2">Mes NFTs</h2>
         <p v-if="collection.items.length === 0">Rien pour le moment 😉</p>
@@ -47,6 +48,7 @@
 
 <script>
 import NftCard from '@/components/NftCard.vue'
+import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'UserCollections',
@@ -62,10 +64,8 @@ export default {
     this.$store.dispatch('loadMyCollection')
   },
   components: {
-    NftCard
+    NftCard,
+    Loader
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

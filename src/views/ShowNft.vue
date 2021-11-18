@@ -3,8 +3,9 @@
     :nft="buy ? nft : false"
     @close="buy = false"
   />
+  <Loader v-if="!nft" class="my-16 mx-auto" />
   <div
-    v-if="nft"
+    v-else
     class="lg:flex show-nft"
   >
     <div class="flex-auto flex h-full overflow-auto items-center">
@@ -41,8 +42,9 @@
 </template>
 
 <script>
-import NftPopin from '../components/NftPopin.vue'
+import NftPopin from '@/components/NftPopin.vue'
 import AppButton from '@/components/AppButton.vue'
+import Loader from '@/components/Loader.vue'
 
 export default {
   name: 'ShowNft',
@@ -64,13 +66,14 @@ export default {
   },
   components: {
     AppButton,
-    NftPopin
+    NftPopin,
+    Loader
   }
 }
 </script>
 
 <style lang="scss">
 .show-nft {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 76px);
 }
 </style>

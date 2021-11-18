@@ -22,8 +22,8 @@
                 />
               </div>
               <div>
-                <div>{{ item.name }}</div>
-                <div class="text-xs">{{ item.description }}</div>
+                <div class="break-words">{{ item.name }}</div>
+                <div class="text-xs full-break">{{ item.description }}</div>
               </div>
             </div>
           </td>
@@ -84,3 +84,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.full-break {
+  word-wrap: anywhere;
+}
+</style>
